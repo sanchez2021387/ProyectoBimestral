@@ -2,7 +2,6 @@ import { response, request } from "express";
 import bcryptjs from 'bcryptjs';
 import User from './user.model.js';
 import { hasRole } from "../middlewares/validar-roles.js";
-
 export const getUsers = async (req = request, res = response) => {
     const { limite, desde } = req.body;
     const query = { state: true }
