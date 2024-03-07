@@ -6,6 +6,7 @@ import { login } from "./auth.controller.js"
 const router = Router();
 
 router.post(
+    
     '/login',
     [
         check('emailOrUser', 'This is not a valid email').not().isEmpty(),

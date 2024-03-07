@@ -6,6 +6,7 @@ export const login = async (req, res) => {
     const { emailOrUser, password } = req.body;
 
     try {
+        
         const user = await User.findOne({
             $or: [
                 { email: emailOrUser },
@@ -32,6 +33,7 @@ export const login = async (req, res) => {
             })
         }
 
+
         const token = await generarJWT(user.id);
 
         res.status(200).json({
@@ -39,6 +41,7 @@ export const login = async (req, res) => {
             user,
             token
         })
+
     } catch (e) {
         console.log(e);
         res.status(500).json({
