@@ -1,138 +1,77 @@
 import { response, request } from "express";
-import bcryptjs from 'bcryptjs';
-import User from './user.model.js';
-
-export const getUsers = async (req = request, res = response) => {
+import Categorys from '../categorys/categorys.model'
+export const getCategorys = async (req = request, res = response) => {
     const { limit, since } = req.body;
-    const query = { state: true }
+    const query = { state: true };
 
-    const [total, users] = await Promise.all([
-        User.countDocuments(query),
-        User.find(query)
+    const [total, categorys] = await Promise.all([
+        Categorys.countDocuments(query),
+        Categorys.find(query)
             .skip(Number(since))
             .limit(Number(limit))
     ]);
 
     res.status(200).json({
         total,
-        users
+        categorys
     })
-
 }
 
-export const createUser = async (req, res) => {
-    const { firstName, lastName, userName, email, password, role } = req.body;
-    const user = new User({ firstName, lastName, userName, email, password, role });
+export const createCategorys = async (req, res) => {
+    const { nameCategorys } = req.body;
+    const categorys = new Categorys({ nameCategorys });
 
-    const salt = bcryptjs.genSaltSync();
-    user.password = bcryptjs.hashSync(password, salt);
-
-    await user.save();
+    await categorys.save();
 
     res.status(200).json({
-        user
+        categorys
     })
 }
 
-export const updateUser = async (req, res = response) => {
+export const updateCategorys = async (req, res = response) => {
 
     const { id } = req.params;
-    const { role, ...rest } = req.body;
-    const authenticatedUser = req.user;
+    const { _id, ...rest } = req.body;
 
-    try {
-        if (authenticatedUser.role === 'USER_ADMIN') {
-            await User.findByIdAndUpdate(id, rest);
+    await Categorys.findByIdAndUpdate(id, rest);
+    const categorys = await Categorys.findOne({ _id: id });
 
-            if (!["USER_ADMIN", "USER_CLIENT"].includes(role)) {
-                return res.status(400).json({
-                    msg: "The only valid roles are ADMIN or CLIENT"
-                })
-            }
-
-            if (role) {
-                await User.findByIdAndUpdate(id, { role });
-            }
-
-            const user = await User.findOne({ _id: id });
-
-            return res.status(200).json({
-                msg: 'User update',
-                user,
-            });
-        }
-
-        if (authenticatedUser.role === 'USER_CLIENT') {
-            if (id !== authenticatedUser.id) {
-                return res.status(403).json({
-                    msg: 'You do not have permissions to edit other users profiles'
-                });
-            }
-            const allowedFields = ['firstName', 'lastName', 'userName'];
-            const fieldsToUpdate = Object.keys(rest).filter(field => allowedFields.includes(field));
-            const updateData = {};
-            fieldsToUpdate.forEach(field => updateData[field] = rest[field]);
-
-            await User.findByIdAndUpdate(id, updateData);
-
-            const user = await User.findOne({ _id: id });
-            res.status(200).json({
-                msg: 'Usuario update',
-                user,
-            });
-
-        }
-
-
-    } catch (e) {
-        console.error(e);
-        res.status(500).json({ msg: 'An error occurred while updating the user' });
-
-    }
-
+    res.status(200).json({
+        msg: 'Category Update',
+        categorys,
+    })
 }
 
-export const deleteUser = async (req, res) => {
-
+export const deleteCategorys = async (req, res) => {
     const { id } = req.params;
-
-    const authenticatedUser = req.user;
+    const { defaultCategorysId } = req.body;
 
     try {
+        const categorysToDelete = await Categorys.findById(id);
 
-        if (authenticatedUser.role === 'USER_ADMIN') {
-            const user = await User.findByIdAndUpdate(id, { state: false });
-            return res.status(200).json({
-                msg: 'User eliminated',
-                user,
-                authenticatedUser
+        if (!categorysToDelete) {
+            return res.status(404).json({
+                msg: 'The category does not exist'
             })
         }
 
+        const productsToUpdate = await Product.find({ categorys: id });
 
-        if (authenticatedUser.role === 'USER_CLIENT') {
-            if (id !== authenticatedUser.id) {
-                return res.status(403).json({
-                    msg: 'You do not have permissions to delete other users profiles '
-                })
-            }
+        await Promise.all(productsToUpdate.map(async product => {
+            product.categorys = defaultCategorysId;
+            await product.save();
+        }));
 
-            const user = await User.findByIdAndUpdate(id, { state: false });
-            return res.status(200).json({
-                msg: 'User deleted',
-                user,
-                authenticatedUser
-            })
-        }
+        const categorys = await Categorys.findByIdAndUpdate(id, { state: false });
 
-        return res.status(403).json({
-            msg: `You need Rol : ${role}`
+        res.status(200).json({
+            msg: 'Category is eliminated',
+            categorys
         })
 
-    } catch (e) {
-        console.error(e);
-        return res.status(500).json({
-            msg: 'error occurred while deleting the user'
+    } catch (error) {
+        res.status(500).json({
+            msg: 'Error the eliminated category'
         })
     }
 }

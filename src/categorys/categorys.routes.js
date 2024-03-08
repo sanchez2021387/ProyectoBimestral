@@ -1,62 +1,49 @@
 import { Router } from "express";
 import { check } from "express-validator";
-<<<<<<< HEAD
-import { getUsers, createUser, updateUser, deleteUser } from "../user/user.controller.js"
-//import { getUsers, createUser, updateUser, deleteUser } from "./user.controller.js";
-import {existenteEmail, esRoleValido, existeUsuarioById } from "../helpers/dv-validators.js"
-// import { existenteEmail, esRoleValido, existeUsuarioById } from "../helpers/db-validators.js";
+import {createCategorys, deleteCategorys, getCategorys, updateCategorys} from './categorys.controller.js'
+import { existeCategorys, existeCategorysById } from '../helpers/dv-validators.js'
 import { validarCampos } from "../middlewares/validar-campos.js";
-import { hasRole } from "../middlewares/validar-roles.js";
 import { validarJWT } from "../middlewares/validar-jwt.js";
-import { format } from "morgan";
-=======
-import { getUsers, createUser, updateUser, deleteUser } from "./user.controller.js";
-import { existenteEmail, esRoleValido, existeUsuarioById } from "../helpers/db-validators.js";
-import { validarCampos } from "../middlewares/validar-campos.js";
 import { hasRole } from "../middlewares/validar-roles.js";
-import { validarJWT } from "../middlewares/validar-jwt.js";
->>>>>>> 31c913c55eaa7a725425f72e7f8090ab899defd9
 
 const router = Router();
 
-router.get("/", getUsers);
+router.get("/", getCategorys);
 
 router.post(
-  "/",
-  [
-    check("firstName", "The firstName is required").not().isEmpty(),
-    check("lastName", "The lastName is required").not().isEmpty(),
-    check("userName", "The userName is required").not().isEmpty(),
-    check("password", "The password must be greater than 5 characters").isLength({ min: 5,}),
-    check("email", "This is not a valid email").isEmail(),
-    check("email").custom(existenteEmail),
-    check("role").custom(esRoleValido),
-    validarCampos,
-  ],
-  createUser
+    "/",
+    [
+        validarJWT,
+        hasRole('USER_ADMIN'),
+        check("nameCategorys", "El nombre es obligatorio").not().isEmpty(),
+        check("nameCategorys").custom(existeCategorys),
+        validarCampos,
+    ],
+    createCategorys
 );
 
 router.put(
-  "/:id",
-  [
-    check("id", "Not a valid ID").isMongoId(),
-    check("id").custom(existeUsuarioById),
-    validarJWT,
-    validarCampos,
-  ],
-  updateUser
+    "/:id",
+    [
+        validarJWT,
+        tieneRole('USER_ADMIN'),
+        check('id', 'No es un Id valido').isMongoId(),
+        check("id").custom(existeCategorysById),
+        validarCampos,
+    ],
+    updateCategorys
 );
 
 router.delete(
-  "/:id",
-  [
-    validarJWT,
-    hasRole("USER_ADMIN", "USER_CLIENT"),
-    check("id", "Not a valid ID").isMongoId(),
-    check("id").custom(existeUsuarioById),
-    validarCampos,
-  ],
-  deleteUser
+    "/:id",
+    [
+        validarJWT,
+        tieneRole('USER_ADMIN'),
+        check('id', 'No es un Id valido').isMongoId(),
+        check("id").custom(existeCategorysById),
+        validarCampos,
+    ],
+    deleteCategorys
 );
 
 export default router;
