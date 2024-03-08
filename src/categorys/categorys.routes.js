@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { check } from "express-validator";
+<<<<<<< HEAD
 import { getUsers, createUser, updateUser, deleteUser } from "../user/user.controller.js"
 //import { getUsers, createUser, updateUser, deleteUser } from "./user.controller.js";
 import {existenteEmail, esRoleValido, existeUsuarioById } from "../helpers/dv-validators.js"
@@ -8,6 +9,13 @@ import { validarCampos } from "../middlewares/validar-campos.js";
 import { hasRole } from "../middlewares/validar-roles.js";
 import { validarJWT } from "../middlewares/validar-jwt.js";
 import { format } from "morgan";
+=======
+import { getUsers, createUser, updateUser, deleteUser } from "./user.controller.js";
+import { existenteEmail, esRoleValido, existeUsuarioById } from "../helpers/db-validators.js";
+import { validarCampos } from "../middlewares/validar-campos.js";
+import { hasRole } from "../middlewares/validar-roles.js";
+import { validarJWT } from "../middlewares/validar-jwt.js";
+>>>>>>> 31c913c55eaa7a725425f72e7f8090ab899defd9
 
 const router = Router();
 
