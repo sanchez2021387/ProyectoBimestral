@@ -6,7 +6,10 @@ import {
     getProducts,
     getProductById,
     getProductsOutOfStock,
-    updateProduct
+    updateProduct,
+    getProductsMostSold,
+    getProductByName,
+    getProductsByCategory
 } from './product.controller.js';
 
 import { existeProduct, existeProductById, existeCategoryById } from '../helpers/db-validators.js';
@@ -18,7 +21,13 @@ const router = Router();
 
 router.get("/", getProducts);
 
-router.get("/ProductoOutOfStock", getProductsOutOfStock)
+router.get("/ProductsByCategory/:categoryId", getProductsByCategory);
+
+router.get("/ProductoOutOfStock", getProductsOutOfStock);
+
+router.get("/ProductsByName", getProductByName);
+
+router.get("/ProductsMostSold", getProductsMostSold);
 
 router.get(
     "/:id",
@@ -34,7 +43,7 @@ router.post(
     "/",
     [
         validarJWT,
-        tieneRole('ADMIN'),
+        tieneRole('USER_ADMIN'),
         check("nameProduct", "El nombre es obligatorio").not().isEmpty().custom(existeProduct),
         check("descriptionProduct", "La descripción es obligatoria").not().isEmpty(),
         check("price", "El precio es obligatorio").not().isEmpty(),
@@ -51,7 +60,7 @@ router.put(
     "/:id",
     [
         validarJWT,
-        tieneRole('ADMIN'),
+        tieneRole('USER_ADMIN'),
         check('id', 'No es un Id válido').isMongoId(),
         validarCampos,
     ],
@@ -62,7 +71,7 @@ router.delete(
     "/:id",
     [
         validarJWT,
-        tieneRole('ADMIN'),
+        tieneRole('USER_ADMIN'),
         check('id', 'No es un Id válido').isMongoId(),
         validarCampos,
     ],

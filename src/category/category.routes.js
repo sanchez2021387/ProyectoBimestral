@@ -20,7 +20,7 @@ router.post(
     "/",
     [
         validarJWT,
-        tieneRole('ADMIN'),
+        tieneRole('USER_ADMIN'),
         check("nameCategory", "El nombre es obligatorio").not().isEmpty(),
         check("nameCategory").custom(existeCategory),
         validarCampos,
@@ -32,7 +32,7 @@ router.put(
     "/:id",
     [
         validarJWT,
-        tieneRole('ADMIN'),
+        tieneRole('USER_ADMIN'),
         check('id', 'No es un Id valido').isMongoId(),
         check("id").custom(existeCategoryById),
         validarCampos,
@@ -44,7 +44,7 @@ router.delete(
     "/:id",
     [
         validarJWT,
-        tieneRole('ADMIN'),
+        tieneRole('USER_ADMIN'),
         check('id', 'No es un Id valido').isMongoId(),
         check("id").custom(existeCategoryById),
         validarCampos,

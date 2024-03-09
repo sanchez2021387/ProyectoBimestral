@@ -41,12 +41,12 @@ export const updateUser = async (req, res = response) => {
     const authenticatedUser = req.user;
 
     try {
-        if (authenticatedUser.role === 'ADMIN') {
+        if (authenticatedUser.role === 'USER_ADMIN') {
             await User.findByIdAndUpdate(id, rest);
 
-            if (!["ADMIN", "CLIENT"].includes(role)) {
+            if (!['USER_ADMIN', 'USER_CLIENT'].includes(role)) {
                 return res.status(400).json({
-                    msg: "Los unicos roles validos son ADMIN o CLIENT"
+                    msg: "Los unicos roles validos son USER_ADMIN o USER_CLIENT"
                 })
             }
 
@@ -62,7 +62,7 @@ export const updateUser = async (req, res = response) => {
             });
         }
 
-        if (authenticatedUser.role === 'CLIENT') {
+        if (authenticatedUser.role === 'USER_CLIENT') {
             if (id !== authenticatedUser.id) {
                 return res.status(403).json({
                     msg: 'You do not have permissions to edit other users profiles'
@@ -90,17 +90,7 @@ export const updateUser = async (req, res = response) => {
 
     }
 
-    /*const { id } = req.params;
-    const { _id, password, email, ...rest } = req.body;
 
-
-    await User.findByIdAndUpdate(id, rest);
-    const user = await User.findOne({ _id: id });
-
-    res.status(200).json({
-        msg: 'Usuario Actualizado',
-        user,
-    });*/
 }
 
 export const deleteUser = async (req, res) => {
@@ -111,7 +101,7 @@ export const deleteUser = async (req, res) => {
 
     try {
 
-        if (authenticatedUser.role === 'ADMIN') {
+        if (authenticatedUser.role === 'USER_ADMIN') {
             const user = await User.findByIdAndUpdate(id, { state: false });
             return res.status(200).json({
                 msg: 'User eliminated',
@@ -121,7 +111,7 @@ export const deleteUser = async (req, res) => {
         }
 
 
-        if (authenticatedUser.role === 'CLIENT') {
+        if (authenticatedUser.role === 'USER_CLIENT') {
             if (id !== authenticatedUser.id) {
                 return res.status(403).json({
                     msg: 'You do not have permissions to delete other users profiles '
@@ -154,4 +144,4 @@ export const deleteUser = async (req, res) => {
     const authenticatedUser = req.user;
 
     res.status(200).json({ msg: 'Usuario desactivado', user, authenticatedUser });*/
-}
+} 
