@@ -1,5 +1,6 @@
 import { response, request } from "express";
 import Category from './category.model.js';
+import Product from '../products/product.model.js';
 
 export const getCategory = async (req = request, res = response) => {
     const { limite, desde } = req.body;
@@ -45,14 +46,34 @@ export const updateCategory = async (req, res = response) => {
 
 export const deleteCategory = async (req, res) => {
     const { id } = req.params;
+    const { defaultCategoryId } = req.body;
 
-    const category = await Category.findByIdAndUpdate(id, { state: false });
+    try {
+        const categoryToDelete = await Category.findById(id);
 
-    const authenticatedCategory = req.category;
+        if (!categoryToDelete) {
+            return res.status(404).json({
+                msg: 'The category does not exist'
+            })
+        }
 
-    res.status(200).json({
-        msg: 'Category deleted',
-        category,
-        authenticatedCategory
-    })
+        const productsToUpdate = await Product.find({ category: id });
+
+        await Promise.all(productsToUpdate.map(async product => {
+            product.category = defaultCategoryId;
+            await product.save();
+        }));
+
+        const category = await Category.findByIdAndUpdate(id, { state: false });
+
+        res.status(200).json({
+            msg: 'Category is eliminated',
+            category
+        })
+
+    } catch (error) {
+        res.status(500).json({
+            msg: 'Error the eliminated category'
+        })
+    }
 }

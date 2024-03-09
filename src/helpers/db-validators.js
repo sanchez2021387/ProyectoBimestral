@@ -1,6 +1,7 @@
 
 import Role from '../role/role.model.js';
 import User from '../user/user.model.js';
+import Product from '../products/product.model.js'
 import Category from '../category/category.model.js';
 
 export const esRoleValido = async (role = '') => {
@@ -42,6 +43,22 @@ export const existeCategoryById = async (id = '') => {
     const existeCategory = await Category.findById(id);
 
     if (!existeCategory) {
+        throw new Error(`El ID: ${id} No existe`);
+    }
+}
+
+export const existeProduct = async (nameProduct = '') => {
+    const existeProduct = await Product.findOne({ nameProduct });
+
+    if (existeProduct) {
+        throw new Error(`The category ${nameProduct} has already been registered`)
+    }
+}
+
+export const existeProductById = async (id = '') => {
+    const existeProduct = await Product.findById(id);
+
+    if (!existeProduct) {
         throw new Error(`El ID: ${id} No existe`);
     }
 }
