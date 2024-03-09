@@ -1,31 +1,31 @@
-import mongoose from "mongoose";
-const UserSchema = mongoose.Schema({
+import mongoose from 'mongoose';
 
+const UserSchema = mongoose.Schema({
     firstName: {
         type: String,
-        required: [true, "The firstName is required"]
+        required: [true, "El nombre es obligotario"]
     },
     lastName: {
         type: String,
-        required: [true, "The lastName is required"]
+        required: [true, "El nombre es obligatorio"]
     },
     userName: {
         type: String,
-        required: [true, "The userName is required"]
+        required: [true, "El apellido es obligatorio"]
     },
     email: {
         type: String,
-        required: [true, "The email is required"],
+        required: [true, "El correo es obligatorio"],
         unique: true
     },
     password: {
         type: String,
-        required: [true, "The password is required"]
+        required: [true, "El contraseña es obligatorio"]
     },
     role: {
         type: String,
-        enum: ["USER_ADMIN", "USER_CLIENT"],
-        default: "USER_CLIENT"
+        enum: ["ADMIN", "CLIENT"],
+        default: "CLIENT"
     },
     state: {
         type: Boolean,

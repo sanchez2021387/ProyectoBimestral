@@ -1,7 +1,6 @@
 import { response, request } from "express";
 import bcryptjs from 'bcryptjs';
 import User from './user.model.js';
-import { hasRole } from "../middlewares/validar-roles.js";
 
 export const getUsers = async (req = request, res = response) => {
     const { limite, desde } = req.body;
@@ -42,8 +41,14 @@ export const updateUser = async (req, res = response) => {
     const authenticatedUser = req.user;
 
     try {
-        if (authenticatedUser.role === 'USER_ADMIN') { 
+        if (authenticatedUser.role === 'ADMIN') {
             await User.findByIdAndUpdate(id, rest);
+
+            if (!["ADMIN", "CLIENT"].includes(role)) {
+                return res.status(400).json({
+                    msg: "Los unicos roles validos son ADMIN o CLIENT"
+                })
+            }
 
             if (role) {
                 await User.findByIdAndUpdate(id, { role });
@@ -52,12 +57,12 @@ export const updateUser = async (req, res = response) => {
             const user = await User.findOne({ _id: id });
 
             return res.status(200).json({
-                msg: 'User Update',
+                msg: 'User Actualizado',
                 user,
             });
         }
 
-        if (authenticatedUser.role === 'USER_CLIENT') {
+        if (authenticatedUser.role === 'CLIENT') {
             if (id !== authenticatedUser.id) {
                 return res.status(403).json({
                     msg: 'You do not have permissions to edit other users profiles'
@@ -72,7 +77,7 @@ export const updateUser = async (req, res = response) => {
 
             const user = await User.findOne({ _id: id });
             res.status(200).json({
-                msg: 'Usuario Update',
+                msg: 'Usuario Actualizado',
                 user,
             });
 
@@ -81,9 +86,21 @@ export const updateUser = async (req, res = response) => {
 
     } catch (error) {
         console.error(error);
-        res.status(500).json({ msg: 'An error occurred while updating the user' });
+        res.status(500).json({ msg: 'Ocurrió un error al actualizar el usuario' });
 
     }
+
+    /*const { id } = req.params;
+    const { _id, password, email, ...rest } = req.body;
+
+
+    await User.findByIdAndUpdate(id, rest);
+    const user = await User.findOne({ _id: id });
+
+    res.status(200).json({
+        msg: 'Usuario Actualizado',
+        user,
+    });*/
 }
 
 export const deleteUser = async (req, res) => {
@@ -94,7 +111,7 @@ export const deleteUser = async (req, res) => {
 
     try {
 
-        if (authenticatedUser.role === 'USER_ADMIN') {
+        if (authenticatedUser.role === 'ADMIN') {
             const user = await User.findByIdAndUpdate(id, { state: false });
             return res.status(200).json({
                 msg: 'User eliminated',
@@ -104,7 +121,7 @@ export const deleteUser = async (req, res) => {
         }
 
 
-        if (authenticatedUser.role === 'USER_CLIENT') {
+        if (authenticatedUser.role === 'CLIENT') {
             if (id !== authenticatedUser.id) {
                 return res.status(403).json({
                     msg: 'You do not have permissions to delete other users profiles '
@@ -129,4 +146,12 @@ export const deleteUser = async (req, res) => {
             msg: 'error occurred while deleting the user'
         })
     }
+    /*
+    const { id } = req.params;
+
+    const user = await User.findByIdAndUpdate(id, { state: false });
+
+    const authenticatedUser = req.user;
+
+    res.status(200).json({ msg: 'Usuario desactivado', user, authenticatedUser });*/
 }

@@ -1,3 +1,4 @@
+
 import jwt from 'jsonwebtoken';
 import User from '../user/user.model.js';
 
@@ -6,7 +7,7 @@ export const validarJWT = async (req, res, next) => {
 
     if (!token) {
         return res.status(401).json({
-            msg: "There is no token in the request",
+            msg: "No hay token en la petición",
         });
     }
 
@@ -17,13 +18,13 @@ export const validarJWT = async (req, res, next) => {
 
         if (!user) {
             return res.status(401).json({
-                msg: 'User does not exist in the database'
+                msg: 'Usuario no existe en la base de datos'
             });
         }
 
         if (!user.state) {
             return res.status(401).json({
-                msg: 'Invalid token - user with status:false'
+                msg: 'Token no válido - usuario con estado:false'
             });
         }
 
@@ -33,7 +34,7 @@ export const validarJWT = async (req, res, next) => {
     } catch (e) {
         console.log(e);
         res.status(401).json({
-            msg: "Invalid token",
+            msg: "Token no válido",
         });
     }
 }

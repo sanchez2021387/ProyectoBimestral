@@ -6,7 +6,6 @@ export const login = async (req, res) => {
     const { emailOrUser, password } = req.body;
 
     try {
-        
         const user = await User.findOne({
             $or: [
                 { email: emailOrUser },
@@ -33,19 +32,17 @@ export const login = async (req, res) => {
             })
         }
 
-
         const token = await generarJWT(user.id);
 
         res.status(200).json({
-            msg: 'Login okay :D',
+            msg: 'Login Ok :D',
             user,
             token
         })
-
     } catch (e) {
         console.log(e);
         res.status(500).json({
-            msg: "Contact administrator :|"
+            msg: "Comuniquese con administrador :|"
         })
     }
 }

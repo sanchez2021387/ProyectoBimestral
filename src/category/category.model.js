@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
 
 
-const categorysSchema = mongoose.Schema({
-    nameCategorys: {
+const categorySchema = mongoose.Schema({
+    nameCategory: {
         type: String,
         required: [true, "The name is requerid"]
     },
@@ -12,4 +12,4 @@ const categorysSchema = mongoose.Schema({
     }
 })
 
-export default mongoose.model('Categorys', categorysSchema);
+export default mongoose.model('Category', categorySchema);

@@ -6,11 +6,10 @@ import { login } from "./auth.controller.js"
 const router = Router();
 
 router.post(
-    
     '/login',
     [
-        check('emailOrUser', 'This is not a valid email').not().isEmpty(),
-        check('password', 'The password is required').not().isEmpty(),
+        check('emailOrUser', 'Este no es un corre valido').not().isEmpty(),
+        check('password', 'El password es obligatorio').not().isEmpty(),
         validarCampos
     ],
     login
