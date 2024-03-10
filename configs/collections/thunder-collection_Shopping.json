@@ -1,0 +1,96 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Shopping",
+    "dateExported": "2024-03-10T04:44:05.426Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "4f2ec508-0fb1-41aa-a17f-e1017ab8df91",
+            "colId": "b8ead09e-5d83-41c1-a6ad-8fb852baadaa",
+            "containerId": "",
+            "name": "getShoppingCar",
+            "url": "http://localhost:3000/gestionDeVentas/v1/shoppingCar/65e66e121dd6d40d65dac6d4",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2024-03-10T03:00:44.601Z",
+            "modified": "2024-03-10T03:00:44.601Z",
+            "headers": [
+                {
+                    "name": "x-token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NWU2NmUxMjFkZDZkNDBkNjVkYWM2ZDQiLCJpYXQiOjE3MDk5NTgzNTgsImV4cCI6MTcwOTk2MTk1OH0.h9bnPbXI5cg67yjk9FRhua0YyRR2fXA5u2YiJm4yINQ"
+                }
+            ],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "41282b22-2ab4-4ef8-a414-20388bc1cf0b",
+            "colId": "b8ead09e-5d83-41c1-a6ad-8fb852baadaa",
+            "containerId": "",
+            "name": "addShoppingCar",
+            "url": "http://localhost:3000/gestionDeVentas/v1/shoppingCar",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2024-03-10T03:00:44.602Z",
+            "modified": "2024-03-10T03:00:44.602Z",
+            "headers": [
+                {
+                    "name": "x-token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NWU2NmUxMjFkZDZkNDBkNjVkYWM2ZDQiLCJpYXQiOjE3MDk5NTgzNTgsImV4cCI6MTcwOTk2MTk1OH0.h9bnPbXI5cg67yjk9FRhua0YyRR2fXA5u2YiJm4yINQ"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"userId\": \"65e66e121dd6d40d65dac6d4\",\n  \"productId\": \"65ea8406b4d42cd9e1f48324\",\n  \"quantity\": \"2\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "c5636a22-f0f3-4057-8915-45c44ffa7c7e",
+            "colId": "b8ead09e-5d83-41c1-a6ad-8fb852baadaa",
+            "containerId": "",
+            "name": "buyShoppingCar",
+            "url": "http://localhost:3000/gestionDeVentas/v1/buyShoppingCar",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2024-03-10T03:00:44.603Z",
+            "modified": "2024-03-10T03:00:44.603Z",
+            "headers": [
+                {
+                    "name": "x-token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NWU2NmUxMjFkZDZkNDBkNjVkYWM2ZDQiLCJpYXQiOjE3MDk5NTgzNTgsImV4cCI6MTcwOTk2MTk1OH0.h9bnPbXI5cg67yjk9FRhua0YyRR2fXA5u2YiJm4yINQ"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"userId\": \"65e66e121dd6d40d65dac6d4\",\n  \"shoppingCartId\": \"65ebefb46af421b37bf0c5f6\",\n  \"total\": 200\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "c4dbfcba-c30a-4969-93a9-b9e271e088fa",
+            "colId": "b8ead09e-5d83-41c1-a6ad-8fb852baadaa",
+            "containerId": "",
+            "name": "getInvoice",
+            "url": "http://localhost:3000/proyectoBimestral/v1/invoice",
+            "method": "GET",
+            "sortNum": 40000,
+            "created": "2024-03-10T03:00:44.604Z",
+            "modified": "2024-03-10T03:03:22.819Z",
+            "headers": [
+                {
+                    "name": "x-token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NWU2NmUxMjFkZDZkNDBkNjVkYWM2ZDQiLCJpYXQiOjE3MDk5NjEzNDAsImV4cCI6MTcwOTk2NDk0MH0.JPZolABC8e0IVJFXGKAAMzOaGkgscXZyr9k4Z7_LKtw"
+                }
+            ],
+            "params": [],
+            "reqType": "get",
+            "tests": []
+        }
+    ]
+}

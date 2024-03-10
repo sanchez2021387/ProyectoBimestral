@@ -1,0 +1,95 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Category",
+    "dateExported": "2024-03-10T04:43:47.139Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "a48b4586-ba4b-4c88-becf-1c461484dd43",
+            "colId": "09bf313d-7e33-458d-84c8-077b546c5964",
+            "containerId": "",
+            "name": "getCategorys",
+            "url": "http://localhost:3000/gestionDeVentas/v1/category",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2024-03-10T02:55:15.602Z",
+            "modified": "2024-03-10T02:55:15.602Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "a602f791-feeb-421d-92a7-8a244dcf8763",
+            "colId": "09bf313d-7e33-458d-84c8-077b546c5964",
+            "containerId": "",
+            "name": "createCategory",
+            "url": "http://localhost:3000/gestionDeVentas/v1/category",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2024-03-10T02:55:15.603Z",
+            "modified": "2024-03-10T02:55:15.603Z",
+            "headers": [
+                {
+                    "name": "x-token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NWU3YTUzZThhNTIzNWI0N2M0NmUyNTAiLCJpYXQiOjE3MDk4NzAwNTIsImV4cCI6MTcwOTg3MzY1Mn0.u7ywYfYkl5FDDj5qaV08E15hmbuFIoEE7wfZ04D0rI0"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"nameCategory\": \"Carros\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "eb6f96c4-be33-4483-a7ac-c149636acef9",
+            "colId": "09bf313d-7e33-458d-84c8-077b546c5964",
+            "containerId": "",
+            "name": "updateCategory",
+            "url": "http://localhost:3000/gestionDeVentas/v1/category/65e9438e15725baef376d3e6",
+            "method": "PUT",
+            "sortNum": 30000,
+            "created": "2024-03-10T02:55:15.604Z",
+            "modified": "2024-03-10T02:55:15.604Z",
+            "headers": [
+                {
+                    "name": "x-token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NWU2NmUxMjFkZDZkNDBkNjVkYWM2ZDQiLCJpYXQiOjE3MDk3ODYxMDEsImV4cCI6MTcwOTc4OTcwMX0.RCqrM2giH5RTNb-7tY-ahEJYqk1e2koZEXqmiU77NTo"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"nameCategory\": \"741852963\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "e21f91c8-1376-4967-b875-33ab553012b5",
+            "colId": "09bf313d-7e33-458d-84c8-077b546c5964",
+            "containerId": "",
+            "name": "deleteCategory",
+            "url": "http://localhost:3000/gestionDeVentas/v1/category/65e9438e15725baef376d3e6",
+            "method": "DELETE",
+            "sortNum": 40000,
+            "created": "2024-03-10T02:55:15.605Z",
+            "modified": "2024-03-10T02:55:15.605Z",
+            "headers": [
+                {
+                    "name": "x-token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NWU3YTUzZThhNTIzNWI0N2M0NmUyNTAiLCJpYXQiOjE3MDk4NjM5MTQsImV4cCI6MTcwOTg2NzUxNH0._mXbN-PHEzCpyXg1aGHRcnNJz5WDWOVOMHgUvT3WDMw"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"defaultCategoryId\": \"65ea564e99243e541356b6d3\"\n}",
+                "form": []
+            },
+            "tests": []
+        }
+    ]
+}

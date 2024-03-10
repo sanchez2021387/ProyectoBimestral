@@ -1,0 +1,29 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Login",
+    "dateExported": "2024-03-10T04:43:57.002Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "86e0abb3-7ba8-4f8e-a23c-dfb45e74d5b4",
+            "colId": "9d2ca4e4-6832-451f-b1b9-4397261c75fe",
+            "containerId": "",
+            "name": "Login",
+            "url": "http://localhost:3000//proyectoBimestral/v1/auth/login",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-03-10T02:55:15.644Z",
+            "modified": "2024-03-10T02:59:01.638Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"emailOrUser\":\"2@kinal.edu.gt\",\n  \"password\":\"123456\"\n}",
+                "form": []
+            },
+            "reqType": "post",
+            "tests": []
+        }
+    ]
+}

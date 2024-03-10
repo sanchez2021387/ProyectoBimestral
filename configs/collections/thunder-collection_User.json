@@ -1,0 +1,109 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "User",
+    "dateExported": "2024-03-10T04:43:12.586Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "b498c445-1296-4e94-af88-b5e01e3be897",
+            "colId": "abb22e85-d3fe-4e96-93a9-a710ed966a0e",
+            "containerId": "",
+            "name": "createUser",
+            "url": "http://localhost:3000/gestionDeVentas/v1/users",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2024-03-10T02:55:15.538Z",
+            "modified": "2024-03-10T02:55:15.538Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"firstName\":\"4\",\n  \"lastName\":\"4\",\n  \"userName\":\"4\",\n  \"email\":\"4@kinal.edu.gt\",\n  \"password\":\"123456\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "f1f84a4d-d0aa-4c05-beaf-dbefacf09faf",
+            "colId": "abb22e85-d3fe-4e96-93a9-a710ed966a0e",
+            "containerId": "",
+            "name": "getUsers",
+            "url": "http://localhost:3000/gestionDeVentas/v1/users",
+            "method": "GET",
+            "sortNum": 40000,
+            "created": "2024-03-10T02:55:15.539Z",
+            "modified": "2024-03-10T02:55:15.539Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "abb9f429-b4bf-4087-bca6-0a529ee3f4fa",
+            "colId": "abb22e85-d3fe-4e96-93a9-a710ed966a0e",
+            "containerId": "",
+            "name": "deleteUsers",
+            "url": "http://localhost:3000/gestionDeVentas/v1/users/65e7a54d8a5235b47c46e253",
+            "method": "DELETE",
+            "sortNum": 50000,
+            "created": "2024-03-10T02:55:15.540Z",
+            "modified": "2024-03-10T02:55:15.540Z",
+            "headers": [
+                {
+                    "name": "x-token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NWU3YTUzZThhNTIzNWI0N2M0NmUyNTAiLCJpYXQiOjE3MDk2ODc5MTcsImV4cCI6MTcwOTY5MTUxN30.LzIX8clCdYm8zRe3PVOlHH6GwzWEwmzLHiSZm0cT-KE"
+                }
+            ],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "a48b9caf-bc10-4fcf-ab62-f3c99ab1afe0",
+            "colId": "abb22e85-d3fe-4e96-93a9-a710ed966a0e",
+            "containerId": "",
+            "name": "updateRole",
+            "url": "http://localhost:3000/gestionDeVentas/v1/users/65e7ad6506b2b9a1e2ba26b3",
+            "method": "PUT",
+            "sortNum": 60000,
+            "created": "2024-03-10T02:55:15.541Z",
+            "modified": "2024-03-10T02:55:15.541Z",
+            "headers": [
+                {
+                    "name": "x-token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NWU3YTUzZThhNTIzNWI0N2M0NmUyNTAiLCJpYXQiOjE3MDk2ODk3MTAsImV4cCI6MTcwOTY5MzMxMH0.i-jNXIsQsJKQbOqR37qBFSsV851cX36_qN2MfYH3GBY"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n \"role\" : \"ADMIN\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "0a824350-44d3-4a71-b99d-bb2e3edec041",
+            "colId": "abb22e85-d3fe-4e96-93a9-a710ed966a0e",
+            "containerId": "",
+            "name": "updateUser",
+            "url": "http://localhost:3000/gestionDeVentas/v1/users/65e7a54d8a5235b47c46e253",
+            "method": "PUT",
+            "sortNum": 70000,
+            "created": "2024-03-10T02:55:15.543Z",
+            "modified": "2024-03-10T02:55:15.543Z",
+            "headers": [
+                {
+                    "name": "x-token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NWU2NmUxMjFkZDZkNDBkNjVkYWM2ZDQiLCJpYXQiOjE3MDk2ODE5OTEsImV4cCI6MTcwOTY4NTU5MX0.rHHMLDYPKnYKLKEJ2MJefJe8UuvbdAxNtvtx1mBjvjw"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"firstName\": \"6\",\n  \"lastName\": \"6\",\n  \"userName\": \"6\"\n}",
+                "form": []
+            },
+            "tests": []
+        }
+    ]
+}
